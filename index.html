@@ -3,381 +3,388 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>梅田駅ファストフード 1000円以内ランダムピックアップ【9月版】</title>
+<title>梅田駅ファストフード 1000円以内ランダムピッカー【10月版】</title>
 <style>
   :root {
-    --primary: #e63946;
-    --secondary: #1d3557;
-    --accent: #f4a261;
-    --bg: #f8f9fa;
-    --card: #ffffff;
-    --text: #212529;
-    --muted: #6c757d;
-    --limited: #d62828;
+    --primary: #e74c3c;
+    --secondary: #f39c12;
+    --bg: #fdf6e3;
+    --card: #fff;
+    --text: #2c3e50;
+    --limited: #9b59b6;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
-    background: linear-gradient(160deg, #fff5f5 0%, #f0f4ff 50%, #fff8e7 100%);
-    color: var(--text);
+    font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 50%, #e17055 100%);
     min-height: 100vh;
+    color: var(--text);
     line-height: 1.6;
   }
   .container {
-    max-width: 720px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 24px 16px 48px;
+    padding: 20px;
   }
   header {
     text-align: center;
-    margin-bottom: 28px;
+    padding: 30px 15px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    margin-bottom: 25px;
+  }
+  h1 {
+    font-size: 1.7rem;
+    color: var(--primary);
+    margin-bottom: 8px;
   }
   .badge {
     display: inline-block;
-    background: var(--primary);
+    background: var(--secondary);
     color: #fff;
-    font-size: 0.85rem;
-    font-weight: 700;
     padding: 4px 14px;
-    border-radius: 999px;
-    margin-bottom: 10px;
-    letter-spacing: 0.05em;
-  }
-  h1 {
-    font-size: 1.55rem;
-    color: var(--secondary);
-    margin-bottom: 6px;
-  }
-  .subtitle {
-    color: var(--muted);
+    border-radius: 20px;
+    font-weight: bold;
     font-size: 0.95rem;
   }
-  .pick-btn {
-    display: block;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto 28px;
-    padding: 18px 24px;
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #fff;
-    background: linear-gradient(135deg, var(--primary), #c1121f);
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
-    transition: transform 0.15s, box-shadow 0.15s;
+  .subtitle {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #666;
   }
-  .pick-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(230, 57, 70, 0.45);
-  }
-  .pick-btn:active { transform: translateY(0); }
-  .result-card {
+  .pick-area {
     background: var(--card);
     border-radius: 20px;
-    padding: 28px 24px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    margin-bottom: 28px;
+    padding: 30px 20px;
     text-align: center;
-    display: none;
-    animation: fadeIn 0.4s ease;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    margin-bottom: 25px;
   }
-  .result-card.show { display: block; }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+  #result {
+    min-height: 140px;
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff8f0;
+    border-radius: 16px;
+    border: 3px dashed var(--primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
   }
-  .result-store {
-    font-size: 0.9rem;
-    color: var(--muted);
-    margin-bottom: 4px;
+  #result.picked {
+    border-style: solid;
+    background: #fff;
   }
-  .result-menu {
-    font-size: 1.45rem;
-    font-weight: 700;
-    color: var(--secondary);
+  .shop-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .menu-name {
+    font-size: 1.25rem;
     margin: 8px 0;
   }
-  .result-price {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--primary);
+  .price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #27ae60;
   }
-  .result-price span { font-size: 1rem; }
   .limited-tag {
     display: inline-block;
     background: var(--limited);
     color: #fff;
     font-size: 0.75rem;
-    font-weight: 700;
-    padding: 2px 10px;
-    border-radius: 6px;
-    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 6px;
     vertical-align: middle;
+  }
+  .btn {
+    background: linear-gradient(135deg, var(--primary), #c0392b);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(231,76,60,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(231,76,60,0.5);
+  }
+  .btn:active {
+    transform: translateY(1px);
   }
   .section {
     background: var(--card);
     border-radius: 16px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   }
   .section h2 {
-    font-size: 1.1rem;
-    color: var(--secondary);
-    margin-bottom: 14px;
+    font-size: 1.2rem;
+    color: var(--primary);
+    border-bottom: 3px solid var(--secondary);
     padding-bottom: 8px;
-    border-bottom: 2px solid #eee;
+    margin-bottom: 15px;
+  }
+  .shop-block {
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #ddd;
+  }
+  .shop-block:last-child { border-bottom: none; }
+  .shop-title {
+    font-weight: bold;
+    font-size: 1.05rem;
+    color: #333;
+    margin-bottom: 4px;
   }
   .min-price {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--primary);
+    color: #27ae60;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
   }
-  .menu-list {
+  ul.menu-list {
     list-style: none;
+    padding-left: 0;
+    font-size: 0.9rem;
   }
-  .menu-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid #f0f0f0;
+  ul.menu-list li {
+    padding: 3px 0;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 0.92rem;
+    gap: 10px;
   }
-  .menu-list li:last-child { border-bottom: none; }
-  .menu-name { flex: 1; }
-  .menu-price { font-weight: 700; color: var(--primary); white-space: nowrap; }
-  .store-name {
-    font-size: 0.8rem;
-    color: var(--muted);
-    display: block;
-    margin-top: 2px;
+  ul.menu-list li span.price-tag {
+    color: #27ae60;
+    white-space: nowrap;
   }
-  .toggle-btn {
-    background: none;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    color: var(--secondary);
-    margin-top: 8px;
-  }
-  .toggle-btn:hover { background: #f5f5f5; }
-  .hidden { display: none; }
   .note {
     font-size: 0.8rem;
-    color: var(--muted);
-    margin-top: 12px;
-    line-height: 1.5;
-  }
-  .prompt-box {
-    background: #f1f3f5;
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 32px;
-    font-size: 0.78rem;
-    color: #495057;
-    word-break: break-all;
-    line-height: 1.7;
-    border: 1px dashed #adb5bd;
-  }
-  .prompt-box h3 {
-    font-size: 0.85rem;
-    margin-bottom: 8px;
-    color: var(--secondary);
+    color: #888;
+    margin-top: 10px;
   }
   footer {
-    text-align: center;
-    margin-top: 24px;
-    font-size: 0.75rem;
-    color: var(--muted);
+    background: rgba(0,0,0,0.85);
+    color: #eee;
+    padding: 25px 20px;
+    border-radius: 16px;
+    margin-top: 30px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    word-break: break-all;
+  }
+  footer h3 {
+    color: var(--secondary);
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+  .prompt-text {
+    background: #222;
+    padding: 12px;
+    border-radius: 8px;
+    white-space: pre-wrap;
   }
 </style>
 </head>
 <body>
 <div class="container">
   <header>
-    <span class="badge">9月版</span>
-    <h1>🍔 梅田駅ファストフード<br>1000円以内ランダムピック</h1>
-    <p class="subtitle">駅周辺でサクッと食えるお店＆メニューをランダム選定</p>
+    <h1>🍔 梅田駅ファストフード<br>1000円以内ランダムピッカー</h1>
+    <span class="badge">10月版</span>
+    <p class="subtitle">梅田駅周辺のファストフード店から<br>1000円以内で食べられるメニューをランダムにピックアップ！</p>
   </header>
 
-  <button class="pick-btn" id="pickBtn" onclick="randomPick()">🎲 ランダムにピックアップ！</button>
-
-  <div class="result-card" id="resultCard">
-    <div class="result-store" id="resultStore"></div>
-    <div class="result-menu" id="resultMenu"></div>
-    <div class="result-price" id="resultPrice"></div>
+  <div class="pick-area">
+    <button class="btn" onclick="pickRandom()">🎲 ランダムに選ぶ！</button>
+    <div id="result">
+      <p style="color:#888;">ボタンを押して今日の一品を決めよう！</p>
+    </div>
   </div>
 
   <div class="section">
-    <h2>💰 全体の最低価格</h2>
-    <p class="min-price" id="minPriceDisplay">—</p>
-    <p class="note">全メニュー中で最も安いものの価格です（税込目安）</p>
-  </div>
-
-  <div class="section">
-    <h2>📋 選ばれるメニュー一覧</h2>
-    <p class="note" style="margin-bottom:12px;">1000円以内のメニューのみ登録。期間限定は<span class="limited-tag">期間限定</span>マーク付き</p>
-    <ul class="menu-list" id="menuList"></ul>
-    <button class="toggle-btn" id="toggleBtn" onclick="toggleList()">一覧をすべて表示</button>
-  </div>
-
-  <div class="prompt-box">
-    <h3>このサイトの元プロンプト</h3>
-    <p>梅田駅のファストフード店で1000円以内で食える場所をランダムにピックアップしてメニューもランダムに選ぶHTMLサイトを作ってください　最低値と選ばれるメニュー一覧も確認できるようにして<br>あと9月版という文字も追加してほしいのと<br>期間限定メニューも入れるようにして欲しいのと<br>このプロンプト自体の文字をサイトの下部に貼って</p>
+    <h2>📋 選ばれるメニュー一覧 &amp; 最低値（税込目安）</h2>
+    <p class="note">※価格は2026年10月時点の目安です。店舗・時期により変動します。期間限定メニューは「期間限定」タグ付き。</p>
+    <div id="menuList"></div>
   </div>
 
   <footer>
-    ※価格・メニューは目安です。店舗・時期により異なる場合があります（2026年9月時点の参考情報を基に作成）
+    <h3>このサイトの元プロンプト</h3>
+    <div class="prompt-text">梅田駅のファストフード店で1000円以内で食える場所をランダムにピックアップしてメニューもランダムに選ぶHTMLサイトを作ってください　最低値と選ばれるメニュー一覧も確認できるようにして
+あと10月版という文字も追加してほしいのと
+期間限定メニューも入れるようにして欲しいのと
+このプロンプト自体の文字をサイトの下部に貼って</div>
   </footer>
 </div>
 
 <script>
-const data = [
+const shops = [
   {
-    store: "マクドナルド 新梅田店 / 梅田茶屋町店など",
+    name: "マクドナルド（新梅田店 / 茶屋町店 / LINKS UMEDA など）",
+    min: 150,
     menus: [
-      { name: "てりやきマックバーガー", price: 390, limited: false },
-      { name: "エビフィレオ", price: 370, limited: false },
-      { name: "チーズバーガー", price: 190, limited: false },
+      { name: "ハンバーガー", price: 170 },
+      { name: "チーズバーガー", price: 200 },
+      { name: "てりやきマックバーガー", price: 390 },
+      { name: "エビフィレオ", price: 420 },
+      { name: "マックフライポテト（M）", price: 350 },
+      { name: "チキンマックナゲット 5ピース", price: 250 },
       { name: "月見バーガー", price: 440, limited: true },
       { name: "チーズ月見", price: 470, limited: true },
-      { name: "とろ旨すき焼き月見", price: 540, limited: true },
-      { name: "チキンクリスプ", price: 250, limited: false },
-      { name: "マックチキン", price: 290, limited: false }
+      { name: "三角チョコパイ クッキー＆クリームいちご味", price: 190, limited: true },
+      { name: "三角チョコパイ 黒", price: 180, limited: true },
+      { name: "ひるまック てりやきセット（平日ランチ目安）", price: 600 }
     ]
   },
   {
-    store: "吉野家 新梅田食道街店など",
+    name: "モスバーガー（ホワイティうめだ / うめきたなど）",
+    min: 240,
     menus: [
-      { name: "牛丼 並盛", price: 468, limited: false },
-      { name: "牛丼 大盛", price: 655, limited: false },
-      { name: "牛皿 並", price: 390, limited: false },
-      { name: "豚丼 並盛", price: 450, limited: false },
-      { name: "鮭定食", price: 638, limited: false }
+      { name: "モスバーガー", price: 420 },
+      { name: "テリヤキチキンバーガー", price: 400 },
+      { name: "ライスバーガーきんぴら", price: 360 },
+      { name: "ライスバーガー焼肉", price: 390 },
+      { name: "モス野菜バーガー", price: 390 },
+      { name: "月見フォカッチャ ～黄金チーズソース～", price: 590, limited: true },
+      { name: "アボカドバーガー", price: 590 }
     ]
   },
   {
-    store: "すき家 梅田周辺店",
+    name: "ケンタッキーフライドチキン（梅田店 / うめきたなど）",
+    min: 300,
     menus: [
-      { name: "牛丼 並盛", price: 430, limited: false },
-      { name: "牛丼 中盛", price: 530, limited: false },
-      { name: "チーズ牛丼 並", price: 530, limited: false },
-      { name: "キムチ牛丼 並", price: 470, limited: false },
-      { name: "とん汁みそらーめん", price: 590, limited: true }
+      { name: "オリジナルチキン 1ピース", price: 320 },
+      { name: "チキンフィレサンド", price: 490 },
+      { name: "骨なしケンタッキー 3ピース", price: 540 },
+      { name: "とろ～り月見ツイスター", price: 430, limited: true },
+      { name: "とろ～り月見フィレバーガー", price: 490, limited: true },
+      { name: "カーネルクリスピー", price: 350 }
     ]
   },
   {
-    store: "松屋 梅田角田町店 / 梅田店など",
+    name: "松屋（梅田角田町店 / 梅田店 / 神山町店 など）",
+    min: 350,
     menus: [
-      { name: "牛めし 並盛", price: 400, limited: false },
-      { name: "牛めし 大盛", price: 560, limited: false },
-      { name: "オリジナルカレー", price: 490, limited: false },
-      { name: "黒麻婆豆腐定食", price: 690, limited: true },
-      { name: "ハンバーグ定食", price: 690, limited: false }
+      { name: "牛めし（並）", price: 460 },
+      { name: "牛めし（大）", price: 680 },
+      { name: "オリジナルカレー", price: 490 },
+      { name: "ロースかつ定食", price: 690 },
+      { name: "ハンバーグ定食", price: 690 },
+      { name: "ネギたっぷり旨辛ネギたま牛めし（並）", price: 660 },
+      { name: "玉子かけごはん", price: 380 }
     ]
   },
   {
-    store: "モスバーガー 大阪駅前第2ビル店など",
+    name: "すき家（梅田周辺店舗）",
+    min: 350,
     menus: [
-      { name: "モスバーガー", price: 470, limited: false },
-      { name: "テリヤキチキンバーガー", price: 450, limited: false },
-      { name: "ライスバーガー きんぴら", price: 360, limited: false },
-      { name: "ライスバーガー 焼肉", price: 390, limited: false },
-      { name: "月見フォカッチャ", price: 590, limited: true }
+      { name: "牛丼（並）", price: 480 },
+      { name: "牛丼（中）", price: 580 },
+      { name: "おんたま牛丼（並）", price: 560 },
+      { name: "チーズ牛丼（並）", price: 580 },
+      { name: "月見すきやき牛丼（並）", price: 690, limited: true },
+      { name: "カレー（並）", price: 490 }
     ]
   },
   {
-    store: "ケンタッキーフライドチキン 梅田店 / うめきた店など",
+    name: "吉野家（梅田東店など）",
+    min: 352,
     menus: [
-      { name: "オリジナルチキン 1ピース", price: 320, limited: false },
-      { name: "チキンフィレサンド", price: 420, limited: false },
-      { name: "とろ～り月見チーズフィレバーガー", price: 540, limited: true },
-      { name: "とろ～り月見ツイスター", price: 480, limited: true },
-      { name: "ナゲット5ピース", price: 390, limited: true }
+      { name: "牛丼（並）", price: 498 },
+      { name: "牛丼（大）", price: 740 },
+      { name: "豚丼（並）", price: 528 },
+      { name: "焼鳥つくね丼", price: 598 },
+      { name: "チキンレッグ", price: 429 }
     ]
   },
   {
-    store: "ファーストキッチン 梅田芝田町店など",
+    name: "バーガーキング（リンクス梅田 / 茶屋町など）",
+    min: 290,
     menus: [
-      { name: "ベーコンエッグバーガー", price: 390, limited: false },
-      { name: "チキン南蛮バーガー", price: 450, limited: false },
-      { name: "ホットドッグ", price: 320, limited: false }
+      { name: "ワッパーJr.", price: 450 },
+      { name: "チーズワッパーJr.", price: 490 },
+      { name: "チキンバーガー", price: 350 },
+      { name: "ハッシュブラウン", price: 200 },
+      { name: "オニオンリング", price: 320 }
     ]
   },
   {
-    store: "サイゼリヤ 梅田センタービル店など",
+    name: "サブウェイ（LINKS UMEDA / 富国生命ビルなど）",
+    min: 390,
     menus: [
-      { name: "ミラノ風ドリア", price: 300, limited: false },
-      { name: "辛味チキン", price: 300, limited: false },
-      { name: "小エビのサラダ", price: 350, limited: false },
-      { name: "バッファローモッツァレラのピザ", price: 400, limited: false },
-      { name: "若鶏のディアボラ風", price: 500, limited: false }
+      { name: "BLT（レギュラー）", price: 490 },
+      { name: "てりやきチキン（レギュラー）", price: 520 },
+      { name: "野菜たっぷりサンド（レギュラー）", price: 420 },
+      { name: "ツナ（レギュラー）", price: 460 },
+      { name: "昼得セット目安（サンド＋ポテト）", price: 650 }
+    ]
+  },
+  {
+    name: "ファーストキッチン / ウェンディーズ・ファーストキッチン（芝田町店）",
+    min: 300,
+    menus: [
+      { name: "ホットドッグ", price: 350 },
+      { name: "チキン竜田サンド", price: 490 },
+      { name: "ベーコンエッグバーガー", price: 480 },
+      { name: "ポテト（M）", price: 320 },
+      { name: "クラムチャウダー", price: 380 }
+    ]
+  },
+  {
+    name: "ゼッテリア（阪急梅田茶屋町口店）",
+    min: 250,
+    menus: [
+      { name: "てりやきビーフバーガー", price: 440, limited: true },
+      { name: "山葵タルタル舞茸ビーフバーガー", price: 620, limited: true },
+      { name: "チーズバーガー", price: 390 },
+      { name: "ポテト", price: 300 },
+      { name: "紅はるかスイートポテトパイ", price: 260, limited: true }
     ]
   }
 ];
 
-// 全メニューをフラット化
-const allMenus = [];
-data.forEach(shop => {
-  shop.menus.forEach(m => {
-    allMenus.push({
-      store: shop.store,
-      name: m.name,
-      price: m.price,
-      limited: m.limited
+// メニュー一覧を描画
+function renderMenuList() {
+  const container = document.getElementById("menuList");
+  let html = "";
+  shops.forEach(shop => {
+    html += `<div class="shop-block">
+      <div class="shop-title">${shop.name}</div>
+      <div class="min-price">最低値：${shop.min}円〜</div>
+      <ul class="menu-list">`;
+    shop.menus.forEach(m => {
+      const tag = m.limited ? '<span class="limited-tag">期間限定</span>' : '';
+      html += `<li><span>${m.name}${tag}</span><span class="price-tag">${m.price}円</span></li>`;
     });
+    html += `</ul></div>`;
   });
-});
-
-// 最低価格
-const minPrice = Math.min(...allMenus.map(m => m.price));
-document.getElementById("minPriceDisplay").textContent = minPrice + "円";
-
-// 一覧表示
-const menuListEl = document.getElementById("menuList");
-let showAll = false;
-const INITIAL_SHOW = 8;
-
-function renderList() {
-  menuListEl.innerHTML = "";
-  const sorted = [...allMenus].sort((a, b) => a.price - b.price);
-  const toShow = showAll ? sorted : sorted.slice(0, INITIAL_SHOW);
-  toShow.forEach(m => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <span class="menu-name">
-        ${m.name}${m.limited ? '<span class="limited-tag">期間限定</span>' : ''}
-        <span class="store-name">${m.store}</span>
-      </span>
-      <span class="menu-price">${m.price}円</span>
-    `;
-    menuListEl.appendChild(li);
-  });
-  document.getElementById("toggleBtn").textContent = showAll ? "一覧を折りたたむ" : "一覧をすべて表示（全" + allMenus.length + "件）";
-}
-renderList();
-
-function toggleList() {
-  showAll = !showAll;
-  renderList();
+  container.innerHTML = html;
 }
 
-function randomPick() {
-  const item = allMenus[Math.floor(Math.random() * allMenus.length)];
-  document.getElementById("resultStore").textContent = item.store;
-  document.getElementById("resultMenu").innerHTML = item.name + (item.limited ? ' <span class="limited-tag">期間限定</span>' : '');
-  document.getElementById("resultPrice").innerHTML = item.price + '<span>円</span>';
-  const card = document.getElementById("resultCard");
-  card.classList.remove("show");
-  void card.offsetWidth; // reflow
-  card.classList.add("show");
+function pickRandom() {
+  const shop = shops[Math.floor(Math.random() * shops.length)];
+  const menu = shop.menus[Math.floor(Math.random() * shop.menus.length)];
+  const resultEl = document.getElementById("result");
+  resultEl.classList.add("picked");
+  const limitedHtml = menu.limited ? '<span class="limited-tag">期間限定</span>' : '';
+  resultEl.innerHTML = `
+    <div class="shop-name">${shop.name}</div>
+    <div class="menu-name">${menu.name}${limitedHtml}</div>
+    <div class="price">${menu.price}円</div>
+    <div style="font-size:0.85rem;color:#888;margin-top:8px;">お店の最低値：${shop.min}円〜</div>
+  `;
 }
+
+renderMenuList();
 </script>
 </body>
 </html>
